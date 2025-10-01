@@ -12,9 +12,7 @@ class HealthTrackerApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Health Tracker",
-      theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: Colors.black,
-      ),
+      theme: ThemeData.dark(), // keep dark theme for cards & text
       home: const DashboardPage(),
     );
   }
@@ -25,43 +23,38 @@ class DashboardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size; // device size
-
     return Scaffold(
-      body: SafeArea(
-        child: Center(
+      body: Container(
+        // 🌈 Fancy gradient background
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color(0xFF0F2027), // dark teal
+              Color(0xFF203A43), // deep blue
+              Color(0xFF2C5364), // cyan blue
+            ],
+          ),
+        ),
+        child: SafeArea(
           child: SingleChildScrollView(
-            child: ConstrainedBox(
-              constraints: BoxConstraints(
-                minHeight: size.height, // forces full height
-                minWidth: size.width,   // forces full width
-              ),
-              child: IntrinsicHeight(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center, // center vertically
-                  crossAxisAlignment: CrossAxisAlignment.center, // center horizontally
-                  children: [
-                    SizedBox(
-                      width: size.width * 0.9, // keep cards within screen
-                      child: Column(
-                        children: [
-                          _welcomeCard(),
-                          const SizedBox(height: 16),
-                          _deviceStatusCard(),
-                          const SizedBox(height: 16),
-                          _statCard("Pulse Rate", "68", "BPM", "Normal"),
-                          const SizedBox(height: 12),
-                          _statCard("Oxygen Level", "97", "%", "Normal"),
-                          const SizedBox(height: 16),
-                          _sevenDayAverages(),
-                          const SizedBox(height: 16),
-                          _recentReadings(),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _welcomeCard(),
+                const SizedBox(height: 16),
+                _deviceStatusCard(),
+                const SizedBox(height: 16),
+                _statCard("Pulse Rate", "68", "BPM", "Normal"),
+                const SizedBox(height: 12),
+                _statCard("Oxygen Level", "97", "%", "Normal"),
+                const SizedBox(height: 16),
+                _sevenDayAverages(),
+                const SizedBox(height: 16),
+                _recentReadings(),
+              ],
             ),
           ),
         ),
@@ -69,7 +62,7 @@ class DashboardPage extends StatelessWidget {
     );
   }
 
-  // --- Your Widgets ---
+  // 🔹 Welcome Card
   Widget _welcomeCard() {
     return Card(
       color: const Color(0xFF1E1E1E),
@@ -77,18 +70,17 @@ class DashboardPage extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center, // center text
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Text(
               "Welcome back, Demo",
-              textAlign: TextAlign.center,
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 4),
             const Text(
               "Sunday, September 28, 2025 at 12:28 PM",
-              textAlign: TextAlign.center,
               style: TextStyle(color: Colors.grey, fontSize: 14),
+              textAlign: TextAlign.center,
             ),
             const SizedBox(height: 12),
             ElevatedButton(
@@ -104,6 +96,7 @@ class DashboardPage extends StatelessWidget {
     );
   }
 
+  // 🔹 Device Status Card
   Widget _deviceStatusCard() {
     return Card(
       color: const Color(0xFF1E1E1E),
@@ -151,6 +144,7 @@ class DashboardPage extends StatelessWidget {
     );
   }
 
+  // 🔹 Stat Card (Pulse / Oxygen)
   Widget _statCard(String title, String value, String unit, String status) {
     return Card(
       color: const Color(0xFF0D1B2A),
@@ -161,7 +155,6 @@ class DashboardPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(title,
-                textAlign: TextAlign.center,
                 style:
                     const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
@@ -181,14 +174,14 @@ class DashboardPage extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 4),
-            Text(status,
-                style: const TextStyle(color: Colors.greenAccent)),
+            Text(status, style: const TextStyle(color: Colors.greenAccent)),
           ],
         ),
       ),
     );
   }
 
+  // 🔹 Seven Day Average
   Widget _sevenDayAverages() {
     return Card(
       color: const Color(0xFF11291F),
@@ -215,7 +208,6 @@ class DashboardPage extends StatelessWidget {
 
   Widget _averageRow(String title, String value, String unit) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
         const SizedBox(height: 4),
@@ -235,6 +227,7 @@ class DashboardPage extends StatelessWidget {
     );
   }
 
+  // 🔹 Recent Readings
   Widget _recentReadings() {
     return Card(
       color: const Color(0xFF2C1C1C),
@@ -260,20 +253,18 @@ class DashboardPage extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6.0),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Text("$bpm BPM",
               style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: Colors.tealAccent)),
-          const SizedBox(width: 24),
           Text("$oxygen %",
               style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: Colors.tealAccent)),
-          const SizedBox(width: 24),
           const Text("Just now",
               style: TextStyle(color: Colors.grey, fontSize: 12)),
         ],
