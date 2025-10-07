@@ -572,7 +572,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 Icon(Icons.waving_hand, color: Color(0xFFFFD700), size: 24),
                 SizedBox(width: 8),
                 Text(
-                  "Welcome back, Demo",
+                  "Welcome back",
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ],
@@ -584,7 +584,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 Icon(Icons.access_time, size: 16, color: Colors.grey[400]),
                 const SizedBox(width: 4),
                 Text(
-                  "Tuesday, October 07, 2025 at 04:45 PM IST",
+                  "Wednesday, October 08, 2025",
                   style: TextStyle(color: Colors.grey[400], fontSize: 14),
                 ),
               ],
