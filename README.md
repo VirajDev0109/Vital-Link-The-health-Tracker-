@@ -16,7 +16,7 @@ For help getting started with Flutter development, view the
 samples, guidance on mobile development, and a full API reference.
 
 
-- For perfectly working bluetooth service
+**For perfectly working bluetooth service**
 - Download the BLE_Server.exe & add to the project directory
 - Then Add the BLE_Server.exe location path to codes server path where needed i.e for this project
 
